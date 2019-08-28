@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="{viewData>/SupplierAction} Supplier" stretchOnPhone="true" contentWidth="40%">
+		<content>
+			<f:SimpleForm editable="{viewData>/SupplierFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Supplier Name" required="true"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/name}"/>
+					<Label text="Description" required="true"/>
+					<TextArea editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/description}"/>
+					<Label text="Phone" />
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/phone}" type="Tel"/>
+					<Label text="Email"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/email}"/>
+					<Label text="Bank A/C No"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/accountno}"/>
+					<Label text="IFSC Code"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/ifsccode}"/>
+					<Label text="Bank Name"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/bankname}"/>
+					<Label text="Bank Branch"/>
+					<Input editable="{viewData>/SupplierFormEditable}" value="{viewData>/SupplierItem/bankbranch}"/>
+					<Label text="Active"/>
+					<CheckBox editable="{viewData>/SupplierFormEditable}" selected="{viewData>/SupplierItem/active1}" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Delete" icon="sap-icon://delete" press="onDeleteSupplier" visible="{viewData>/DeleteVisible}"/>
+			<Button text="Edit" icon="sap-icon://edit" press="onEditSupplier" visible="{viewData>/EditVisible}"/>
+			<Button text="Submit" icon="sap-icon://save" press="onSubmitSupplier" visible="{viewData>/SubmitVisible}"/>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCancelSupplier"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

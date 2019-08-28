@@ -34,6 +34,14 @@ sap.ui.define([
 		
 		onNavToSiteManagement: function(){
 			this.getRouter().navTo("SiteManagement");
+		},
+		
+		onNavToSupplierManagement: function(){
+			this.getRouter().navTo("SupplierManagement");
+		},
+		
+		onNavToPurchaseBills: function(){
+			this.getRouter().navTo("PurchaseBills");
 		}
 	});
 });

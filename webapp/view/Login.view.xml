@@ -18,7 +18,7 @@
 							<Label text="Username"/>
 							<Input id="idUserNameInput" placeholder="Enter Username ..."/>
 							<Label text="Password"/>
-							<Input id="idPasswordInput" type="Password" placeholder="Enter password ..."/>
+							<Input id="idPasswordInput" type="Password" placeholder="Enter password ..." submit="onLogin"/>
 							<Label text=""/>
 							<Button type="Emphasized" text="Login" press="onLogin"/>
 						</f:content>

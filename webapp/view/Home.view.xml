@@ -4,7 +4,7 @@
 		<customHeader>
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Title text="Expenses Approval" level="H3"/>
+				<Title text="Home" level="H3"/>
 				<ToolbarSpacer/>
 				<Button text="Logout" press="onLogout"/>
 			</Toolbar>
@@ -17,12 +17,12 @@
 					visible="{= ${user>/roleid} === '1' ? true : false }"/>
 				<StandardTile title="Expense Report" info="List of expenses" icon="sap-icon://expense-report" press="onNavToExpenseReport"
 					visible="{= ${user>/roleid} === '1' ? true : false }"/>
-				<StandardTile title="Reciepts" info="Payments entries" icon="sap-icon://receipt" press="onNavToReceipts"
+				<!--<StandardTile title="Reciepts" info="Payments entries" icon="sap-icon://receipt" press="onNavToReceipts"
 					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+					<StandardTile title="Expense Appovals" info="Approve impress expenses" icon="sap-icon://payment-approval" number="50"
+					press="onNavToExpenseApproval" visible="{= ${user>/roleid} === '1' ? true : false }"/>-->
 				<StandardTile title="Purchase Bills" info="Maintain Purchase Bills" icon="sap-icon://receipt" press="onNavToPurchaseBills"
 					visible="{= ${user>/roleid} === '1' ? true : false }"/>
-				<StandardTile title="Expense Appovals" info="Approve impress expenses" icon="sap-icon://payment-approval" number="50"
-					press="onNavToExpenseApproval" visible="{= ${user>/roleid} === '1' ? true : false }"/>
 				<StandardTile title="User Management" info="Manage RAAH Users" icon="sap-icon://user-settings" press="onNavToUserManagement"
 					visible="{= ${user>/roleid} === '1' ? true : false }"/>
 				<StandardTile title="Site Management" info="Manage RAAH Sites" icon="sap-icon://building" press="onNavToSiteManagement"

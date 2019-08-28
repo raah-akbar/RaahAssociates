@@ -1,0 +1,77 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.SupplierManagement" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Supplier Management" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Table id="idSuppliersTable" items="{viewData>/Suppliers}" updateFinished="onSupplierUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="{ parts : [{path:'i18n>suppliersTableTitleCount'}, {path:'viewData>/NoOfSuppliers'}], formatter : 'jQuery.sap.formatMessage' }"
+								level="H2"/>
+							<ToolbarSpacer/>
+							<SearchField width="12rem" liveChange="onSearchSupplier"/>
+							<Button icon="sap-icon://add" press="onAddSupplier"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Supplier Name"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Description"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Phone"/>
+					</Column>
+					<Column>
+						<Text text="Email"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Bank A/C No"/>
+					</Column>
+					<Column>
+						<Text text="IFSC Code"/>
+					</Column>
+					<Column>
+						<Text text="Bank Name"/>
+					</Column>
+					<Column>
+						<Text text="Bank Branch"/>
+					</Column>
+					<Column>
+						<Text text="Active"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Created"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Active" press="onDisplaySupplier">
+						<cells>
+							<Text text="{viewData>name}"/>
+							<Text text="{viewData>description}"/>
+							<Text text="{viewData>phone}"/>
+							<Text text="{viewData>email}"/>
+							<Text text="{viewData>accountno}"/>
+							<Text text="{viewData>ifsccode}"/>
+							<Text text="{viewData>bankname}"/>
+							<Text text="{viewData>bankbranch}"/>
+							<Text text="{= ${viewData>active} === '1' ? 'Yes' : 'No'}"/>
+							<Text text="{path: 'viewData>created', formatter:'.getDataDispValue'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

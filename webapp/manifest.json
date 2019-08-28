@@ -122,6 +122,16 @@
 					"name": "SiteManagement",
 					"pattern": "SiteManagement",
 					"target": "SiteManagement"
+				},
+				{
+					"name": "SupplierManagement",
+					"pattern": "SupplierManagement",
+					"target": "SupplierManagement"
+				},
+				{
+					"name": "PurchaseBills",
+					"pattern": "PurchaseBills",
+					"target": "PurchaseBills"
 				}
 			],
 			"targets": {
@@ -169,6 +179,16 @@
 					"viewType": "XML",
 					"transition": "slide",
 					"viewName": "SiteManagement"
+				},
+				"SupplierManagement": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "SupplierManagement"
+				},
+				"PurchaseBills": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "PurchaseBills"
 				}
 			}
 		}

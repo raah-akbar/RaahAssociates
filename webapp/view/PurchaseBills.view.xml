@@ -1,0 +1,57 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.PurchaseBills" displayBlock="true">
+	<Page >
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Expenses" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Carousel height="auto" showPageIndicator="false" pages="{viewData>/ExpenseInfo}">
+				<customLayout>
+					<CarouselLayout visiblePagesCount="3"/>
+				</customLayout>
+				<TileContent footer="{viewData>Name}" class="sapUiSmallMargin">
+					<content>
+						<NumericContent value="{viewData>Amount}" icon="sap-icon://lead"/>
+					</content>
+				</TileContent>
+			</Carousel>
+			<Table id="idExpenseBreakupTable" items="{viewData>/Expenses}"  updateFinished="onExpenseUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="Expenses" level="H2"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://add" press="onAddExpense"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column hAlign="End">
+						<Text text="Amount"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Date"/>
+					</Column>
+					<Column hAlign="Center">
+						<Text text="Description"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{viewData>amount}"/>
+							<Text text="{viewData>expensedate}"/>
+							<Text text="{viewData>description}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>
