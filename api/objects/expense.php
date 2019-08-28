@@ -26,7 +26,7 @@ class Expense{
     }
 	
 	// read expenses
-	function read(sUserId){
+	function read(){
  
 		// select all query
 		$query = "SELECT * FROM	" . $this->table_name . " ORDER BY expensedate DESC";

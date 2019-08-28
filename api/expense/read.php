@@ -34,6 +34,7 @@ if($num>0){
         // this will make $row['name'] to
         // just $name only
         extract($row);
+        
         $expense_item=array(
             "id" => $id,
 			"site" => $site,

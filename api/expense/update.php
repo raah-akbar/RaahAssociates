@@ -28,10 +28,7 @@ $data = json_decode(file_get_contents("php://input"));
 if(
 	$utilities->notempty($data->id) &&
     $utilities->notempty($data->towards) &&
-    $utilities->notempty($data->towardsid) &&
     $utilities->notempty($data->category) &&
-    $utilities->notempty($data->site) &&
-    $utilities->notempty($data->siteid) &&
     $utilities->notempty($data->totalamount) &&
     $utilities->notempty($data->description) &&
     $utilities->notempty($data->expensedate)

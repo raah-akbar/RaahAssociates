@@ -224,8 +224,23 @@ sap.ui.define([
 			var oViewModel = this.getModel("viewData"),
 				oPayloadObj = oViewModel.getProperty("/ExpenseItem");
 			oPayloadObj.imprest = oPayloadObj.imprest1 ? "1" : "0";
-			oPayloadObj.towards = "Ajay";
+			oPayloadObj.sitename = this.getValueFromKey(oViewModel.getProperty("/Sites"), oPayloadObj.siteid, "id", "name");
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
+			if(oPayloadObj.category === "Others"){
+				oPayloadObj.towardsid = "";
+				oPayloadObj.imprest = "0";
+				oPayloadObj.purchasebillno = "";
+				oPayloadObj.supplierid = "";
+				oPayloadObj.suppliername = "";
+			}else if(oPayloadObj.category === "Supervisor"){
+				oPayloadObj.towards = this.getValueFromKey(oViewModel.getProperty("/Users"), oPayloadObj.towardsid, "id", "username");
+				oPayloadObj.purchasebillno = "";
+				oPayloadObj.supplierid = "";
+				oPayloadObj.suppliername = "";
+			}else if(oPayloadObj.category === "Supplier"){	
+				oPayloadObj.towards = this.getValueFromKey(oViewModel.getProperty("/Suppliers"), oPayloadObj.supplierid, "id", "name");
+				oPayloadObj.imprest = "0";
+			}
 			if (this._isDataValid(oPayloadObj)) {
 				var sUrl, oModel = new JSONModel(),
 					sUserAction = oViewModel.getProperty("/UserAction");
