@@ -27,6 +27,7 @@ sap.ui.define([
 				PurchaseBillDate: null,
 				ExpenseItem: {
 					towardsid: "",
+					supplierid: "",
 					category: "Supervisor",
 					purchasebillno: "",
 					totalamount: "",
@@ -200,7 +201,7 @@ sap.ui.define([
 						filters: aFilters,
 						and: false
 					});
-				this.getFragmentControl("expDialog","idPurchaseBillsCB").getBinding("items").filter([oFilter]);
+					this.byId("expDialog--idPurchaseBillsCB").getBinding("items").filter([oFilter]);
 				}.bind(this), 500);
 			} else {
 				MessageToast.show(oData.message);

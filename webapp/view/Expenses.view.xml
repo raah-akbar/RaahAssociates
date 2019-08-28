@@ -29,7 +29,6 @@
 								level="H2"/>
 							<ToolbarSpacer/>
 							<SearchField width="10rem"/>
-							<Button icon="sap-icon://edit" press="onEditExpense"/>
 							<Button icon="sap-icon://add" press="onAddExpense"/>
 						</content>
 					</Toolbar>

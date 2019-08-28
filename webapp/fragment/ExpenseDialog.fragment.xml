@@ -15,13 +15,15 @@
 						items="{ path: 'dropdown>/records', sorter: { path: 'text' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'category', operator : 'EQ', value1 : 'CategoriesDD'} ]}">
 						<core:Item key="{dropdown>textid}" text="{dropdown>text}"/>
 					</ComboBox>
+					<Label text="Towards" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Others' ? true : false}"/>
+					<Input value="{viewData>/ExpenseItem/towards}" visible="{= ${viewData>/ExpenseItem/category} === 'Others' ? true : false}"/>
 					<Label text="Supervisor" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"/>
 					<ComboBox selectedKey="{viewData>/ExpenseItem/towardsid}" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"
 						items="{ path: 'viewData>/Users', sorter: { path: 'username' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'roleid', operator : 'EQ', value1 : 2} ]}">
 						<core:Item key="{viewData>id}" text="{viewData>username}"/>
 					</ComboBox>
 					<Label text="Supplier" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
-					<ComboBox selectedKey="{viewData>/ExpenseItem/towardsid}" change="onSupplierChange"
+					<ComboBox selectedKey="{viewData>/ExpenseItem/supplierid}" change="onSupplierChange"
 						visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"
 						items="{ path: 'viewData>/Suppliers', sorter: { path: 'name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}]}">
 						<core:Item key="{viewData>id}" text="{viewData>name}"/>
@@ -33,7 +35,7 @@
 						<core:Item key="{viewData>billno}" text="{viewData>billno} -- {viewData>suppliername}"/>
 					</ComboBox>
 					<Label text="Purchase Bill Date" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
-					<Text text="{viewData>PurchaseBillDate}" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
+					<Text text="{path : 'viewData>/PurchaseBillDate', formatter : '.getDataDispValue'}" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
 					<Label text="Date" required="true"/>
 					<DatePicker dateValue="{viewData>/ExpenseItem/expensedate1}"/>
 					<Label text="Imprest" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"/>
