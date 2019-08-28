@@ -1,9 +1,9 @@
 <?php
-class Supplier{
+class PurchaseBill{
  
     // database connection and table name
     private $conn;
-    private $table_name = "suppliers";
+    private $table_name = "purchasebills";
  
     // object properties
 	public $id;
@@ -38,33 +38,49 @@ class Supplier{
 	 
 		return $stmt;
 	}
-	
+	public $supplierid;
+    public $suppliername;
+    public $description;
+    public $billdate;
+    public $billno;
+    public $amount;
+    public $gstamount;
+    public $totalamount;
+    public $active;
+    public $created;
+    public $modified;
 	// create user
 	function create(){
 		// query to insert record
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					name=:name, description=:description, location=:location, startdate=:startdate, enddate=:enddate, active=:active, created=:created";
+					supplierid=:supplierid, suppliername=:suppliername, description=:description, billdate=:billdate, billno=:billno, amount=:amount, gstamount=:gstamount, totalamount=:totalamount, active=:active, created=:created";
 	 
 		// prepare query
 		$stmt = $this->conn->prepare($query);
 	 
 		// sanitize
-		$this->name=htmlspecialchars(strip_tags($this->name));
+		$this->supplierid=htmlspecialchars(strip_tags($this->supplierid));
+		$this->suppliername=htmlspecialchars(strip_tags($this->suppliername));
 		$this->description=htmlspecialchars(strip_tags($this->description));
-		$this->location=htmlspecialchars(strip_tags($this->location));
-		$this->startdate=htmlspecialchars(strip_tags($this->startdate));
-		$this->enddate=htmlspecialchars(strip_tags($this->enddate));
+		$this->billdate=htmlspecialchars(strip_tags($this->billdate));
+		$this->billno=htmlspecialchars(strip_tags($this->billno));
+		$this->amount=htmlspecialchars(strip_tags($this->amount));
+		$this->gstamount=htmlspecialchars(strip_tags($this->gstamount));
+		$this->totalamount=htmlspecialchars(strip_tags($this->totalamount));
 		$this->active=htmlspecialchars(strip_tags($this->active));
 		$this->created=htmlspecialchars(strip_tags($this->created));
 		
 		// bind values
-		$stmt->bindParam(":name", $this->name);
+		$stmt->bindParam(":supplierid", $this->supplierid);
+		$stmt->bindParam(":suppliername", $this->suppliername);
 		$stmt->bindParam(":description", $this->description);
-		$stmt->bindParam(":location", $this->location);
-		$stmt->bindParam(":startdate", $this->startdate);
-		$stmt->bindParam(":enddate", $this->enddate);
+		$stmt->bindParam(":billdate", $this->billdate);
+		$stmt->bindParam(":billno", $this->billno);
+		$stmt->bindParam(":amount", $this->amount);
+		$stmt->bindParam(":gstamount", $this->gstamount);
+		$stmt->bindParam(":totalamount", $this->totalamount);
 		$stmt->bindParam(":active", $this->active);
 		$stmt->bindParam(":created", $this->created);
 	 
@@ -82,7 +98,7 @@ class Supplier{
 		$query = "UPDATE
 					" . $this->table_name . "
 				SET
-					name=:name, description=:description, location=:location, startdate=:startdate, enddate=:enddate, active=:active, modified=:modified
+					supplierid=:supplierid, suppliername=:suppliername, description=:description, billdate=:billdate, billno=:billno, amount=:amount, gstamount=:gstamount, totalamount=:totalamount, active=:active, modified=:modified
 				WHERE
 					id = :id";
 	 
@@ -90,20 +106,26 @@ class Supplier{
 		$stmt = $this->conn->prepare($query);
 	 
 		// sanitize
-		$this->name=htmlspecialchars(strip_tags($this->name));
+		$this->supplierid=htmlspecialchars(strip_tags($this->supplierid));
+		$this->suppliername=htmlspecialchars(strip_tags($this->suppliername));
 		$this->description=htmlspecialchars(strip_tags($this->description));
-		$this->location=htmlspecialchars(strip_tags($this->location));
-		$this->startdate=htmlspecialchars(strip_tags($this->startdate));
-		$this->enddate=htmlspecialchars(strip_tags($this->enddate));
+		$this->billdate=htmlspecialchars(strip_tags($this->billdate));
+		$this->billno=htmlspecialchars(strip_tags($this->billno));
+		$this->amount=htmlspecialchars(strip_tags($this->amount));
+		$this->gstamount=htmlspecialchars(strip_tags($this->gstamount));
+		$this->totalamount=htmlspecialchars(strip_tags($this->totalamount));
 		$this->active=htmlspecialchars(strip_tags($this->active));
 		$this->modified=htmlspecialchars(strip_tags($this->modified));
 		
 		// bind values
-		$stmt->bindParam(":name", $this->name);
+		$stmt->bindParam(":supplierid", $this->supplierid);
+		$stmt->bindParam(":suppliername", $this->suppliername);
 		$stmt->bindParam(":description", $this->description);
-		$stmt->bindParam(":location", $this->location);		
-		$stmt->bindParam(":startdate", $this->startdate);		
-		$stmt->bindParam(":enddate", $this->enddate);
+		$stmt->bindParam(":billdate", $this->billdate);
+		$stmt->bindParam(":billno", $this->billno);
+		$stmt->bindParam(":amount", $this->amount);
+		$stmt->bindParam(":gstamount", $this->gstamount);
+		$stmt->bindParam(":totalamount", $this->totalamount);
 		$stmt->bindParam(":active", $this->active);
 		$stmt->bindParam(":modified", $this->modified);
 		$stmt->bindParam(":id", $this->id);
