@@ -1,0 +1,30 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" controllerName="com.raahassociates.launchpad.controller.Login" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Title text="Login" level="H3"/>
+				<ToolbarSpacer/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<VBox fitContainer="true" justifyContent="Center" alignItems="Center" alignContent="Center">
+				<items>
+					<f:SimpleForm id="idLoginForm" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<Label text="Username"/>
+							<Input id="idUserNameInput" placeholder="Enter Username ..."/>
+							<Label text="Password"/>
+							<Input id="idPasswordInput" type="Password" placeholder="Enter password ..."/>
+							<Label text=""/>
+							<Button type="Emphasized" text="Login" press="onLogin"/>
+						</f:content>
+					</f:SimpleForm>
+				</items>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

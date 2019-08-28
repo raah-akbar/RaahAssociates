@@ -1,0 +1,77 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.UserManagement" displayBlock="true">
+	<Page >
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="User Management" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Table id="idUsersTable" items="{viewData>/Users}" updateFinished="onUserUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="{ parts : [{path:'i18n>usersTableTitleCount'}, {path:'viewData>/NoOfUsers'}], formatter : 'jQuery.sap.formatMessage' }"
+								level="H2"/>
+							<ToolbarSpacer/>
+							<SearchField width="12rem" liveChange="onSearchUser"/>
+							<Button icon="sap-icon://add" press="onAddUser"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Username"/>
+					</Column>
+					<Column demandPopin="true" minScreenWidth="Tablet">
+						<Text text="Password"/>
+					</Column>
+					<Column>
+						<Text text="First Name"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Last Name"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Email"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="RAAH Email"/>
+					</Column>
+					<Column hAlign="End" demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Phone"/>
+					</Column>
+					<Column>
+						<Text text="Role"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Active"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Created"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Active" press="onDisplayUser">
+						<cells>
+							<Text text="{viewData>username}"/>
+							<Text text="{viewData>password}"/>
+							<Text text="{viewData>firstname}"/>
+							<Text text="{viewData>lastname}"/>
+							<Text text="{viewData>email}"/>
+							<Text text="{viewData>orgemail}"/>
+							<Text text="{viewData>phone}"/>
+							<Text text="{viewData>rolename}"/>
+							<Text text="{= ${viewData>active} === '1' ? 'Yes' : 'No'}"/>
+							<Text text="{path: 'viewData>created', formatter: '.getDataDispValue'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

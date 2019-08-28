@@ -1,0 +1,20 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.Receipts" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Receipts" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+				<MaskInput mask="999999">
+					<rules>
+						<MaskInputRule maskFormatSymbol="9" regex="[^\d{0,3}(\.\d{1,2})?$]"/>
+					</rules>
+				</MaskInput>
+		</content>
+	</Page>
+</mvc:View>

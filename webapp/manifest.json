@@ -1,0 +1,180 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "com.raahassociates.launchpad",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.raahassociates.launchpad.view.App",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.52.1",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.raahassociates.launchpad.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "com.raahassociates.launchpad.view",
+				"controlAggregation": "pages",
+				"controlId": "idLaunchpadApp",
+				"clearControlAggregation": false
+			},
+			"routes": [
+				{
+					"name": "Login",
+					"pattern": "",
+					"target": "Login"
+				},
+				{
+					"name": "Home",
+					"pattern": "Home",
+					"target": "Home"
+				},
+				{
+					"name": "Expenses",
+					"pattern": "Expenses",
+					"target": "Expenses"
+				},
+				{
+					"name": "ExpenseBreakup",
+					"pattern": "ExpenseBreakup",
+					"target": "ExpenseBreakup"
+				},
+				{
+					"name": "ExpenseReport",
+					"pattern": "ExpenseReport",
+					"target": "ExpenseReport"
+				},
+				{
+					"name": "Receipts",
+					"pattern": "Receipts",
+					"target": "Receipts"
+				},
+				{
+					"name": "ExpenseApproval",
+					"pattern": "ExpenseApproval",
+					"target": "ExpenseApproval"
+				},
+				{
+					"name": "UserManagement",
+					"pattern": "UserManagement",
+					"target": "UserManagement"
+				},
+				{
+					"name": "SiteManagement",
+					"pattern": "SiteManagement",
+					"target": "SiteManagement"
+				}
+			],
+			"targets": {
+				"Login": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "Login"
+				},
+				"Home": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "Home"
+				},
+				"Expenses": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "Expenses"
+				},
+				"ExpenseBreakup": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "ExpenseBreakup"
+				},
+				"ExpenseReport": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "ExpenseReport"
+				},
+				"Receipts": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "Receipts"
+				},
+				"ExpenseApproval": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "ExpenseApproval"
+				},
+				"UserManagement": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "UserManagement"
+				},
+				"SiteManagement": {
+					"viewType": "XML",
+					"transition": "slide",
+					"viewName": "SiteManagement"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}

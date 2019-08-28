@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="Add Expense">
+		<content>
+			<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+				adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Site" required="true"/>
+					<ComboBox selectedKey="{viewData>/ExpenseItem/siteid}"
+						items="{ path: 'viewData>/Sites', sorter: { path: 'Name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1} ]}">
+						<core:Item key="{viewData>id}" text="{viewData>name}"/>
+					</ComboBox>
+					<Label text="Date" required="true"/>
+					<DatePicker dateValue="{viewData>/ExpenseItem/expensedate1}" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy"/>
+					<Label text="Amount" required="true"/>
+					<Input value="{viewData>/ExpenseItem/amount}" type="Number" description="₹"/>
+					<Label text="Description" required="true"/>
+					<TextArea value="{viewData>/ExpenseItem/description}" rows="3"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button text="Submit" icon="sap-icon://save" press="onSubmitExpense"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCancelExpense"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,30 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="{viewData>/SiteAction} Site" stretchOnPhone="true" contentWidth="40%">
+		<content>
+			<f:SimpleForm editable="{viewData>/SiteFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Sitename" required="true"/>
+					<Input editable="{viewData>/SiteFormEditable}" value="{viewData>/SiteItem/name}"/>
+					<Label text="Description" required="true"/>
+					<TextArea editable="{viewData>/SiteFormEditable}" value="{viewData>/SiteItem/description}"/>
+					<Label text="Location" />
+					<Input editable="{viewData>/SiteFormEditable}" value="{viewData>/SiteItem/location}"/>
+					<Label text="Start Date" required="true"/>
+					<DatePicker editable="{viewData>/SiteFormEditable}" dateValue="{viewData>/SiteItem/startdate1}"/>
+					<Label text="End Date"/>
+					<DatePicker editable="{viewData>/SiteFormEditable}" dateValue="{viewData>/SiteItem/enddate1}"/>
+					<Label text="Active"/>
+					<CheckBox editable="{viewData>/SiteFormEditable}" selected="{viewData>/SiteItem/active1}" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Delete" icon="sap-icon://delete" press="onDeleteSite" visible="{viewData>/DeleteVisible}"/>
+			<Button text="Edit" icon="sap-icon://edit" press="onEditSite" visible="{viewData>/EditVisible}"/>
+			<Button text="Submit" icon="sap-icon://save" press="onSubmitSite" visible="{viewData>/SubmitVisible}"/>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCancelSite"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

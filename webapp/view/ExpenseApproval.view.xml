@@ -1,0 +1,15 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.ExpenseApproval" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Expenses Approval" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content></content>
+	</Page>
+</mvc:View>

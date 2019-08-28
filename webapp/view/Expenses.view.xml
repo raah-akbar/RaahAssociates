@@ -1,0 +1,68 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.Expenses" displayBlock="true">
+	<Page >
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Expenses" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Carousel height="auto" showPageIndicator="false" pages="{/SiteExpenses}">
+				<customLayout>
+					<CarouselLayout visiblePagesCount="5"/>
+				</customLayout>
+				<TileContent footer="{Name}" class="sapUiSmallMargin">
+					<content>
+						<NumericContent value="{Amount}" icon="sap-icon://lead"/>
+					</content>
+				</TileContent>
+			</Carousel>
+			<Table id="idExpensesTable" items="{viewData>/Expenses}" updateFinished="onExpenseUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="{ parts : [{path:'i18n>expensesTableTitleCount'}, {path:'viewData>/NoOfExpenses'}], formatter : 'jQuery.sap.formatMessage' }"
+								level="H2"/>
+							<ToolbarSpacer/>
+							<SearchField width="10rem"/>
+							<Button icon="sap-icon://edit" press="onEditExpense"/>
+							<Button icon="sap-icon://add" press="onAddExpense"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Towards"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="Amount"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Site"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Date"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Description"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Navigation">
+						<cells>
+							<Text text="{viewData>towards}"/>
+							<Text text="{viewData>amount}"/>
+							<Text text="{viewData>siteid}"/>
+							<Text text="{viewData>expensedate}"/>
+							<Text text="{viewData>description}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

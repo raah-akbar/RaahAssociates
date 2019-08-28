@@ -1,0 +1,35 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.Home" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Title text="Expenses Approval" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<TileContainer>
+				<StandardTile title="Manage Expenses" info="Add expense and imprest" icon="sap-icon://money-bills" number="22.3L" numberUnit="₹"
+					press="onNavToExpenses" visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Expenses" info="Add expenses" icon="sap-icon://money-bills" number="22.3L" numberUnit="₹" press="onNavToExpenseBreakup"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Expense Report" info="List of expenses" icon="sap-icon://expense-report" press="onNavToExpenseReport"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Reciepts" info="Payments entries" icon="sap-icon://receipt" press="onNavToReceipts"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Purchase Bills" info="Maintain Purchase Bills" icon="sap-icon://receipt" press="onNavToPurchaseBills"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Expense Appovals" info="Approve impress expenses" icon="sap-icon://payment-approval" number="50"
+					press="onNavToExpenseApproval" visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="User Management" info="Manage RAAH Users" icon="sap-icon://user-settings" press="onNavToUserManagement"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Site Management" info="Manage RAAH Sites" icon="sap-icon://building" press="onNavToSiteManagement"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+				<StandardTile title="Supplier Management" info="Manage RAAH Suppliers" icon="sap-icon://supplier" press="onNavToSupplierManagement"
+					visible="{= ${user>/roleid} === '1' ? true : false }"/>
+			</TileContainer>
+		</content>
+	</Page>
+</mvc:View>

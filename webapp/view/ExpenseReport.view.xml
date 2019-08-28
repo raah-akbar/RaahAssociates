@@ -1,0 +1,88 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core" controllerName="com.raahassociates.launchpad.controller.ExpenseReport" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Expenses Report" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<fb:FilterBar id="idFilterBarFGD" showFilterConfiguration="false" search="onSearch" clear="onClear" showClearOnFB="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="Site" groupTitle="Site" name="Site" label="Site" mandatory="true" labelTooltip="Site"
+						visibleInFilterBar="true">
+						<fb:control>
+							<ComboBox items="{ path: '/Sites', sorter: { path: 'Name' } }">
+								<core:Item key="{Name}" text="{Name}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="Category" groupTitle="Category" name="Category" label="Category" labelTooltip="Category"
+						visibleInFilterBar="true">
+						<fb:control>
+							<ComboBox items="{ path: '/Categories', sorter: { path: 'Type' } }">
+								<core:Item key="{Type}" text="{Type}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="Towards" groupTitle="Towards" name="Towards" label="Towards" labelTooltip="Towards" visibleInFilterBar="true">
+						<fb:control>
+							<ComboBox items="{ path: '/Towards', sorter: { path: 'Name' } }">
+								<core:Item key="{Name}" text="{Name}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="DateRange" groupTitle="DateRange" name="DateRange" label="Date Range" labelTooltip="Date Range"
+						visibleInFilterBar="true">
+						<fb:control>
+							<DateRangeSelection/>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+			<Table items="{/Expenses}" updateFinished="onProjectUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="Expenses ({viewData>/NoOfProjects})" level="H2"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://excel-attachment" type="Transparent" text="Export to Excel" press="onExportExcel"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Towards"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="Amount"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Site"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Date"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Description"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle">
+						<cells>
+							<Text text="{Towards}"/>
+							<Text text="{Currency} {Amount}"/>
+							<Text text="{Site}"/>
+							<Text text="{Date}"/>
+							<Text text="{Description}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

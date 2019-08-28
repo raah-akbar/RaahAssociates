@@ -1,0 +1,38 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="{viewData>/UserAction} User" stretchOnPhone="true" contentWidth="40%">
+		<content>
+			<f:SimpleForm editable="{viewData>/UserFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Username" required="true"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/username}"/>
+					<Label text="Password" required="true"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/password}"/>
+					<Label text="First Name" required="true"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/firstname}"/>
+					<Label text="Last Name"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/lastname}"/>
+					<Label text="Email"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/email}"/>
+					<Label text="RAAH Email"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/orgemail}"/>
+					<Label text="Phone"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/phone}"/>
+					<Label text="Role Id" required="true"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/roleid}"/>
+					<Label text="Role Name" required="true"/>
+					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/rolename}"/>
+					<Label text="Active"/>
+					<CheckBox editable="{viewData>/UserFormEditable}" selected="{viewData>/UserItem/active1}" />
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Delete" icon="sap-icon://delete" press="onDeleteUser" visible="{viewData>/DeleteVisible}"/>
+			<Button text="Edit" icon="sap-icon://edit" press="onEditUser" visible="{viewData>/EditVisible}"/>
+			<Button text="Submit" icon="sap-icon://save" press="onSubmitUser" visible="{viewData>/SubmitVisible}"/>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCancelUser"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

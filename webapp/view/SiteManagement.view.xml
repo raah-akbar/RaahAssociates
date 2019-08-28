@@ -1,0 +1,65 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.raahassociates.launchpad.controller.SiteManagement" displayBlock="true">
+	<Page>
+		<customHeader>
+			<Toolbar>
+				<Button type="Back" press="onNavBack" tooltip="Back"/>
+				<ToolbarSpacer/>
+				<Title text="Site Management" level="H3"/>
+				<ToolbarSpacer/>
+				<Button text="Logout" press="onLogout"/>
+			</Toolbar>
+		</customHeader>
+		<content>
+			<Table id="idSitesTable" items="{viewData>/Sites}" updateFinished="onSiteUpdateFinished">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<Title text="{ parts : [{path:'i18n>sitesTableTitleCount'}, {path:'viewData>/NoOfSites'}], formatter : 'jQuery.sap.formatMessage' }"
+								level="H2"/>
+							<ToolbarSpacer/>
+							<SearchField width="12rem" liveChange="onSearchSite"/>
+							<Button icon="sap-icon://add" press="onAddSite"/>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="Site Name"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Description"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Location" />
+					</Column>
+					<Column>
+						<Text text="Start Date"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="End Date"/>
+					</Column>
+					<Column>
+						<Text text="Active"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Created"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Active" press="onDisplaySite">
+						<cells>
+							<Text text="{viewData>name}"/>
+							<Text text="{viewData>description}"/>
+							<Text text="{viewData>location}"/>
+							<Text text="{path: 'viewData>startdate', formatter:'.getDataDispValue'}"/>
+							<Text text="{path: 'viewData>enddate', formatter:'.getDataDispValue'}"/>
+							<Text text="{= ${viewData>active} === '1' ? 'Yes' : 'No'}"/>
+							<Text text="{path: 'viewData>created', formatter:'.getDataDispValue'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>

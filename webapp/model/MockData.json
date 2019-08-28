@@ -1,0 +1,173 @@
+{
+  "Sites": [
+    {
+      "Name": "Gopalpur",
+      "State": "Orissa"
+    },
+    {
+      "Name": "Vizag",
+      "State": "Andhra"
+    },
+    {
+      "Name": "Shamshabad",
+      "State": "Telangana"
+    }
+  ],
+  "Categories": [
+    {
+      "Type": "Supplier"
+    },
+    {
+      "Type": "Contractor"
+    },
+    {
+      "Type": "Supervisor"
+    }
+  ],
+  "Towards": [
+    {
+      "Name": "Raju",
+      "Type": "Contractor"
+    },
+    {
+      "Name": "Tekchand",
+      "Type": "Contractor"
+    },
+    {
+      "Name": "GMP",
+      "Type": "Supplier"
+    },
+    {
+      "Name": "Swagath",
+      "Type": "Supplier"
+    },
+    {
+      "Name": "Murtuza",
+      "Type": "Supervisor"
+    },
+    {
+      "Name": "Ajay",
+      "Type": "Supervisor"
+    }
+  ],
+  "SiteExpenses":[
+  	{
+      "Name": "Gopalpur",
+      "Amount": "255000"
+    },
+    {
+      "Name": "Shamshabad",
+      "Amount": "875000"
+    },
+    {
+      "Name": "ECIL",
+      "Amount": "25000"
+    },
+    	{
+      "Name": "Gopalpur",
+      "Amount": "255000"
+    },
+    {
+      "Name": "Shamshabad",
+      "Amount": "875000"
+    },
+    {
+      "Name": "ECIL",
+      "Amount": "25000"
+    },
+    	{
+      "Name": "Gopalpur",
+      "Amount": "255000"
+    },
+    {
+      "Name": "Shamshabad",
+      "Amount": "875000"
+    },
+    {
+      "Name": "ECIL",
+      "Amount": "25000"
+    }
+  ],
+  "Expenses": [
+    {
+      "Site": "Gopalpur",
+      "Category": "Supplier",
+      "Towards": "Swagath",
+      "Amount": "35000",
+      "Currency": "₹",
+      "Description": "Materials taken from Swagath Steel",
+      "Date": "02/02/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Shamshabad",
+      "Category": "Supplier",
+      "Towards": "GMP",
+      "Amount": "15000",
+      "Currency": "₹",
+      "Description": "Materials taken from GMP",
+      "Date": "01/02/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Gopalpur",
+      "Category": "Supplier",
+      "Towards": "GMP",
+      "Amount": "12000",
+      "Currency": "₹",
+      "Description": "Materials taken from GMP",
+      "Date": "31/01/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Gopalpur",
+      "Category": "Contractor",
+      "Towards": "Tekchand",
+      "Amount": "50000",
+      "Currency": "₹",
+      "Description": "Amount given to contractor",
+      "Date": "05/02/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Gopalpur",
+      "Category": "Contractor",
+      "Towards": "Raju",
+      "Amount": "17500",
+      "Currency": "₹",
+      "Description": "Amount given to contractor",
+      "Date": "04/02/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Shamshabad",
+      "Category": "Contractor",
+      "Towards": "Raju",
+      "Amount": "7500",
+      "Currency": "₹",
+      "Description": "Amount given to contractor",
+      "Date": "03/02/2019",
+      "Imprest": false
+    },
+    {
+      "Site": "Gopalpur",
+      "Category": "Supervisor",
+      "Towards": "Murtuza",
+      "Amount": "5000",
+      "Currency": "₹",
+      "Description": "Amount given to supervisor as imprest",
+      "Date": "02/02/2019",
+      "Imprest": true
+    },
+    {
+      "Site": "Shamshabad",
+      "Category": "Supervisor",
+      "Towards": "Ajay",
+      "Amount": "5000",
+      "Currency": "₹",
+      "Description": "Amount given to supervisor as imprest",
+      "Date": "03/02/2019",
+      "Imprest": true
+    }
+  ]
+}
