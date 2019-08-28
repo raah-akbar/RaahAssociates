@@ -24,6 +24,7 @@ sap.ui.define([
 				Users: [],
 				Suppliers: [],
 				PurchaseBills: [],
+				PurchaseBillDate: null,
 				ExpenseItem: {
 					towardsid: "",
 					category: "Supervisor",
@@ -179,7 +180,7 @@ sap.ui.define([
 			oModel.attachRequestCompleted(this._onReadPurchaseBillsComplete, this);
 			oModel.attachRequestFailed(this._onReadPurchaseBillsFailed, this);
 			this.getBusyDialog().open();
-			oModel.loadData("/api/supplier/read", null, true,
+			oModel.loadData("/api/purchasebill/read", null, true,
 				"GET", false, false, {
 					"Accept": "*/*",
 					"Content-Type": "application/json; charset=UTF-8"
@@ -191,14 +192,16 @@ sap.ui.define([
 			var oData = oEvent.getSource().getData();
 			if (oData.success) {
 				this.getModel("viewData").setProperty("/PurchaseBills", oData.records);
-				var aFilters = [
+				setTimeout(function(){
+					var aFilters = [
 						new Filter("supplierid", FilterOperator.Contains, this._sSupplier)
 					],
 					oFilter = new Filter({
 						filters: aFilters,
 						and: false
 					});
-				this.byId("idPurchaseBillsCB").getBinding("items").filter([oFilter]);
+				this.getFragmentControl("expDialog","idPurchaseBillsCB").getBinding("items").filter([oFilter]);
+				}.bind(this), 500);
 			} else {
 				MessageToast.show(oData.message);
 			}
@@ -207,7 +210,12 @@ sap.ui.define([
 		_onReadPurchaseBillsFailed: function () {
 			this.getBusyDialog().close();
 		},
-
+		
+		onPurchaseBillChange: function(oEvent){
+			var sBillDate = oEvent.getParameter("selectedItem").getBindingContext("viewData").getProperty("billdate");
+			this.getModel("viewData").setProperty("/PurchaseBillDate", sBillDate);
+		},
+		
 		onAddExpense: function () {
 			this._getExpenseDialog().open();
 		},
@@ -224,7 +232,7 @@ sap.ui.define([
 			var oViewModel = this.getModel("viewData"),
 				oPayloadObj = oViewModel.getProperty("/ExpenseItem");
 			oPayloadObj.imprest = oPayloadObj.imprest1 ? "1" : "0";
-			oPayloadObj.sitename = this.getValueFromKey(oViewModel.getProperty("/Sites"), oPayloadObj.siteid, "id", "name");
+			oPayloadObj.site = this.getValueFromKey(oViewModel.getProperty("/Sites"), oPayloadObj.siteid, "id", "name");
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
 			if(oPayloadObj.category === "Others"){
 				oPayloadObj.towardsid = "";

@@ -2,8 +2,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
-	"sap/ui/core/format/DateFormat"
-], function (Controller, History, DateFormat) {
+	"sap/ui/core/format/DateFormat",
+	"sap/ui/core/Fragment"
+], function (Controller, History, DateFormat, Fragment) {
 	"use strict";
 
 	return Controller.extend("com.raahassociates.launchpad.controller.BaseController", {
@@ -45,7 +46,18 @@ sap.ui.define([
 		getResourceBundle: function () {
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
-
+		
+		/**
+		 * Returns a control from fragment with provided fragment id
+		 * @param   {string}              sFragId    fragment id
+		 * @param   {string}              sControlId control if to get
+		 * @returns {sap.ui.core.Control} Control inside fragment
+		 * @private
+		 */
+		getFragmentControl: function (sFragId, sControlId) {
+			return Fragment.byId(sFragId, sControlId);
+		},
+		
 		/**
 		 * Event handler  for navigating back.
 		 * It checks if there is a history entry. If yes, history.go(-1) will happen.
@@ -114,8 +126,8 @@ sap.ui.define([
 		getValueFromKey: function(arr, key, keyValue, valueValue){
 			var i, sValue = "";
 			for(i = 0; i < arr.length; i++){
-				if(arr[0][keyValue] === key){
-					sValue = arr[0][valueValue];
+				if(arr[i][keyValue] === key){
+					sValue = arr[i][valueValue];
 					break;
 				}
 			}
