@@ -27,19 +27,23 @@ $data = json_decode(file_get_contents("php://input"));
 if(
     $utilities->notempty($data->towards) &&
     $utilities->notempty($data->towardsid) &&
-    $utilities->notempty($data->imprest) &&
+    $utilities->notempty($data->category) &&
+    $utilities->notempty($data->site) &&
     $utilities->notempty($data->siteid) &&
-    $utilities->notempty($data->amount) &&
+    $utilities->notempty($data->totalamount) &&
     $utilities->notempty($data->description) &&
     $utilities->notempty($data->expensedate)
 ){
  
     // set expense property values
+    $expense->site = $data->site;
+    $expense->siteid = $data->siteid;
+    $expense->category = $data->category;
     $expense->towards = $data->towards;
     $expense->towardsid = $data->towardsid;
+    $expense->purchasebillno = $data->purchasebillno;
     $expense->imprest = $data->imprest;
-    $expense->siteid = $data->siteid;
-    $expense->amount = $data->amount;
+    $expense->totalamount = $data->totalamount;
     $expense->description = $data->description;
     $expense->expensedate = $data->expensedate;
 	$expense->created = date('Y-m-d H:i:s');

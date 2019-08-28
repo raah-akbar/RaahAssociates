@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="{viewData>/PurchaseBillAction} Purchase Bill">
+		<content>
+			<f:SimpleForm editable="{viewData>/PurchaseBillFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+				singleContainerFullSize="false">
+				<f:content>
+					<Label text="Supplier" required="true"/>
+					<ComboBox selectedKey="{viewData>/PurchaseBillItem/supplierid}"
+						items="{ path: 'viewData>/Suppliers', sorter: { path: 'name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}]}">
+						<core:Item key="{viewData>id}" text="{viewData>name}"/>
+					</ComboBox>
+					<Label text="Description" required="true"/>
+					<TextArea editable="{viewData>/PurchaseBillFormEditable}" value="{viewData>/PurchaseBillItem/description}"/>
+					<Label text="Bill Date" required="true"/>
+					<DatePicker editable="{viewData>/PurchaseBillFormEditable}" dateValue="{viewData>/PurchaseBillItem/billdate1}"/>
+					<Label text="Bill Number" required="true"/>
+					<Input editable="{viewData>/PurchaseBillFormEditable}" value="{viewData>/PurchaseBillItem/billno}"/>
+					<Label text="Amount" required="true"/>
+					<Input editable="{viewData>/PurchaseBillFormEditable}" value="{viewData>/PurchaseBillItem/amount}" type="Number"/>
+					<Label text="GST Amount" required="true"/>
+					<Input editable="{viewData>/PurchaseBillFormEditable}" value="{viewData>/PurchaseBillItem/gstamount}" type="Number"/>
+					<Label text="Total Amount" required="true"/>
+					<Input editable="{viewData>/PurchaseBillFormEditable}" value="{viewData>/PurchaseBillItem/totalamount}" type="Number"/>
+					<Label text="Active"/>
+					<CheckBox editable="{viewData>/PurchaseBillFormEditable}" selected="{viewData>/PurchaseBillItem/active1}"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<buttons>
+			<Button text="Delete" icon="sap-icon://delete" press="onDeletePurchaseBill" visible="{viewData>/DeleteVisible}"/>
+			<Button text="Edit" icon="sap-icon://edit" press="onEditPurchaseBill" visible="{viewData>/EditVisible}"/>
+			<Button text="Submit" icon="sap-icon://save" press="onSubmitPurchaseBill" visible="{viewData>/SubmitVisible}"/>
+			<Button text="Cancel" icon="sap-icon://decline" press="onCancelPurchaseBill"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

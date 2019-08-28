@@ -7,24 +7,36 @@
 				<f:content>
 					<Label text="Site" required="true"/>
 					<ComboBox selectedKey="{viewData>/ExpenseItem/siteid}"
-						items="{ path: 'viewData>/Sites', sorter: { path: 'Name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1} ]}">
+						items="{ path: 'viewData>/Sites', sorter: { path: 'name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1} ]}">
 						<core:Item key="{viewData>id}" text="{viewData>name}"/>
 					</ComboBox>
 					<Label text="Category" required="true"/>
-					<ComboBox selectedKey="{viewData>/ExpenseItem/category}"
-						items="{ path: 'dropdown>/records', sorter: { path: 'Type' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'category', operator : 'EQ', value1 : 'CategoriesDD'} ]}">
+					<ComboBox selectedKey="{viewData>/ExpenseItem/category}" change="onCategoryChange"
+						items="{ path: 'dropdown>/records', sorter: { path: 'text' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'category', operator : 'EQ', value1 : 'CategoriesDD'} ]}">
 						<core:Item key="{dropdown>textid}" text="{dropdown>text}"/>
 					</ComboBox>
-					<Label text="Towards" required="true"/>
-					<ComboBox selectedKey="{viewData>/ExpenseItem/towardsid}" items="{ path: '/Towards', sorter: { path: 'Name' } }">
+					<Label text="Supervisor" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"/>
+					<ComboBox selectedKey="{viewData>/ExpenseItem/towardsid}" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"
+						items="{ path: 'viewData>/Users', sorter: { path: 'username' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'roleid', operator : 'EQ', value1 : 2} ]}">
+						<core:Item key="{viewData>id}" text="{viewData>username}"/>
+					</ComboBox>
+					<Label text="Supplier" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
+					<ComboBox selectedKey="{viewData>/ExpenseItem/towardsid}" change="onSupplierChange"
+						visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"
+						items="{ path: 'viewData>/Suppliers', sorter: { path: 'name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}]}">
+						<core:Item key="{viewData>id}" text="{viewData>name}"/>
+					</ComboBox>
+					<Label text="Purchase Bill Number" required="true" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"/>
+					<ComboBox id="idPurchaseBillsCB" selectedKey="{viewData>/ExpenseItem/purchasebillno}" visible="{= ${viewData>/ExpenseItem/category} === 'Supplier' ? true : false}"
+						items="{ path: 'viewData>/Users', sorter: { path: 'Name' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'roleid', operator : 'EQ', value1 : 2} ]}">
 						<core:Item key="{Name}" text="{Name}"/>
 					</ComboBox>
 					<Label text="Date" required="true"/>
 					<DatePicker dateValue="{viewData>/ExpenseItem/expensedate1}"/>
-					<Label text="Imprest"/>
-					<CheckBox selected="{viewData>/ExpenseItem/imprest}"/>
+					<Label text="Imprest" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"/>
+					<CheckBox selected="{viewData>/ExpenseItem/imprest}" visible="{= ${viewData>/ExpenseItem/category} === 'Supervisor' ? true : false}"/>
 					<Label text="Amount" required="true"/>
-					<Input value="{viewData>/ExpenseItem/amount}" type="Number" description="₹"/>
+					<Input value="{viewData>/ExpenseItem/totalamount}" type="Number" description="₹"/>
 					<Label text="Description" required="true"/>
 					<TextArea value="{viewData>/ExpenseItem/description}" rows="3"/>
 				</f:content>

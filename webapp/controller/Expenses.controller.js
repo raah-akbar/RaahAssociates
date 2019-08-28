@@ -10,6 +10,9 @@ sap.ui.define([
 	"use strict";
 
 	return BaseController.extend("com.raahassociates.launchpad.controller.Expenses", {
+
+		_sSupplier: "",
+
 		onInit: function () {
 			var oViewModel;
 			// Model used to manipulate control states
@@ -17,10 +20,15 @@ sap.ui.define([
 				NoOfExpenses: "0",
 				UserAction: "Add",
 				Expenses: [],
-				Sites:[],
+				Sites: [],
+				Users: [],
+				Suppliers: [],
+				PurchaseBills: [],
 				ExpenseItem: {
 					towardsid: "",
-					amount: "",
+					category: "Supervisor",
+					purchasebillno: "",
+					totalamount: "",
 					imprest1: false,
 					siteid: "",
 					description: "",
@@ -33,9 +41,10 @@ sap.ui.define([
 
 		_onRouteMatched: function () {
 			this._getSites();
+			this._getUsers();
 			this._getExpenses();
 		},
-		
+
 		_getSites: function () {
 			var oModel = new JSONModel();
 			oModel.attachRequestCompleted(this._onReadSitesComplete, this);
@@ -62,6 +71,32 @@ sap.ui.define([
 			this.getBusyDialog().close();
 		},
 
+		_getUsers: function () {
+			var oModel = new JSONModel();
+			oModel.attachRequestCompleted(this._onReadUsersComplete, this);
+			oModel.attachRequestFailed(this._onReadUsersFailed, this);
+			this.getBusyDialog().open();
+			oModel.loadData("/api/user/read", null, true,
+				"GET", false, false, {
+					"Accept": "*/*",
+					"Content-Type": "application/json; charset=UTF-8"
+				});
+		},
+
+		_onReadUsersComplete: function (oEvent) {
+			this.getBusyDialog().close();
+			var oData = oEvent.getSource().getData();
+			if (oData.success) {
+				this.getModel("viewData").setProperty("/Users", oData.records);
+			} else {
+				MessageToast.show(oData.message);
+			}
+		},
+
+		_onReadUsersFailed: function () {
+			this.getBusyDialog().close();
+		},
+
 		_getExpenses: function () {
 			var oModel = new JSONModel();
 			oModel.attachRequestCompleted(this._onReadExpensesComplete, this);
@@ -71,7 +106,7 @@ sap.ui.define([
 				"GET", false, false, {
 					"Accept": "*/*",
 					"Content-Type": "application/json; charset=UTF-8"
-			});
+				});
 		},
 
 		_onReadExpensesComplete: function (oEvent) {
@@ -87,7 +122,7 @@ sap.ui.define([
 		_onReadExpensesFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
+
 		onExpenseUpdateFinished: function (oEvent) {
 			// update the project's object counter after the table update
 			var oTable = oEvent.getSource(),
@@ -98,6 +133,79 @@ sap.ui.define([
 			} else {
 				this.getModel("viewData").setProperty("/NoOfExpenses", "0");
 			}
+		},
+
+		onCategoryChange: function (oEvent) {
+			var sCategory = oEvent.getSource().getSelectedKey();
+			if (sCategory === "Supplier") {
+				this._getSuppliers();
+			}
+		},
+
+		_getSuppliers: function () {
+			var oModel = new JSONModel();
+			oModel.attachRequestCompleted(this._onReadSuppliersComplete, this);
+			oModel.attachRequestFailed(this._onReadSuppliersFailed, this);
+			this.getBusyDialog().open();
+			oModel.loadData("/api/supplier/read", null, true,
+				"GET", false, false, {
+					"Accept": "*/*",
+					"Content-Type": "application/json; charset=UTF-8"
+				});
+		},
+
+		_onReadSuppliersComplete: function (oEvent) {
+			this.getBusyDialog().close();
+			var oData = oEvent.getSource().getData();
+			if (oData.success) {
+				this.getModel("viewData").setProperty("/Suppliers", oData.records);
+			} else {
+				MessageToast.show(oData.message);
+			}
+		},
+
+		_onReadSuppliersFailed: function () {
+			this.getBusyDialog().close();
+		},
+
+		onSupplierChange: function (oEvent) {
+			var sSupplier = oEvent.getSource().getSelectedKey();
+			this._sSupplier = sSupplier ? sSupplier : "";
+			this._getPurchaseBills();
+		},
+
+		_getPurchaseBills: function () {
+			var oModel = new JSONModel();
+			oModel.attachRequestCompleted(this._onReadPurchaseBillsComplete, this);
+			oModel.attachRequestFailed(this._onReadPurchaseBillsFailed, this);
+			this.getBusyDialog().open();
+			oModel.loadData("/api/supplier/read", null, true,
+				"GET", false, false, {
+					"Accept": "*/*",
+					"Content-Type": "application/json; charset=UTF-8"
+				});
+		},
+
+		_onReadPurchaseBillsComplete: function (oEvent) {
+			this.getBusyDialog().close();
+			var oData = oEvent.getSource().getData();
+			if (oData.success) {
+				this.getModel("viewData").setProperty("/PurchaseBills", oData.records);
+				var aFilters = [
+						new Filter("supplierid", FilterOperator.Contains, this._sSupplier)
+					],
+					oFilter = new Filter({
+						filters: aFilters,
+						and: false
+					});
+				this.byId("idPurchaseBillsCB").getBinding("items").filter([oFilter]);
+			} else {
+				MessageToast.show(oData.message);
+			}
+		},
+
+		_onReadPurchaseBillsFailed: function () {
+			this.getBusyDialog().close();
 		},
 
 		onAddExpense: function () {
@@ -114,16 +222,16 @@ sap.ui.define([
 
 		onSubmitExpense: function () {
 			var oViewModel = this.getModel("viewData"),
-			oPayloadObj = oViewModel.getProperty("/ExpenseItem");
+				oPayloadObj = oViewModel.getProperty("/ExpenseItem");
 			oPayloadObj.imprest = oPayloadObj.imprest1 ? "1" : "0";
 			oPayloadObj.towards = "Ajay";
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
-			if(this._isDataValid(oPayloadObj)){
+			if (this._isDataValid(oPayloadObj)) {
 				var sUrl, oModel = new JSONModel(),
-				sUserAction = oViewModel.getProperty("/UserAction");
-				if(sUserAction === "Add"){
+					sUserAction = oViewModel.getProperty("/UserAction");
+				if (sUserAction === "Add") {
 					sUrl = "/api/expense/create";
-				}else if(sUserAction === "Edit"){
+				} else if (sUserAction === "Edit") {
 					sUrl = "/api/expense/update";
 				}
 				delete oPayloadObj.expensedate1;
@@ -135,9 +243,9 @@ sap.ui.define([
 					"POST", false, false, {
 						"Accept": "*/*",
 						"Content-Type": "application/json; charset=UTF-8"
-				});
+					});
 			}
-		
+
 		},
 
 		_onCreateExpenseComplete: function (oEvent) {
@@ -155,25 +263,26 @@ sap.ui.define([
 		_onCreateExpenseFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
-		_isDataValid: function(oData){
-			var bIsValid = true, aFields = [];
-			if(!oData.towards){
+
+		_isDataValid: function (oData) {
+			var bIsValid = true,
+				aFields = [];
+			if (!oData.towards) {
 				aFields.push("Towards");
 			}
-			if(!oData.siteid){
+			if (!oData.siteid) {
 				aFields.push("Site");
 			}
-			if(!oData.description){
+			if (!oData.description) {
 				aFields.push("Description");
 			}
-			if(!oData.expensedate){
+			if (!oData.expensedate) {
 				aFields.push("Expense Date");
 			}
-			if(aFields.length > 0){
+			if (aFields.length > 0) {
 				bIsValid = false;
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
-				sMessage = aFields.join(", ");
+					sMessage = aFields.join(", ");
 				MessageBox.alert(sMessage + " is/are mandatory.", {
 					styleClass: bCompact ? "sapUiSizeCompact" : ""
 				});
@@ -198,14 +307,18 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass(this.getOwnerComponent().getContentDensityClass(), oView, this._oExpenseDialog);
 			return this._oExpenseDialog;
 		},
-		
-		_getFormattedDateStr: function(oDate){
-			var oDateFormat = DateFormat.getDateTimeInstance({pattern : "yyyy-MM-dd HH:mm:ss" });   
+
+		_getFormattedDateStr: function (oDate) {
+			var oDateFormat = DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd HH:mm:ss"
+			});
 			return oDateFormat.format(oDate);
 		},
-		
-		_getFormattedDate: function(sDate){
-			var oDateFormat = DateFormat.getDateTimeInstance({pattern : "yyyy-MM-dd HH:mm:ss" });   
+
+		_getFormattedDate: function (sDate) {
+			var oDateFormat = DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd HH:mm:ss"
+			});
 			return oDateFormat.parse(sDate);
 		}
 	});

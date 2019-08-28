@@ -34,14 +34,16 @@ if($num>0){
         // this will make $row['name'] to
         // just $name only
         extract($row);
- 
         $expense_item=array(
             "id" => $id,
+			"site" => $site,
+			"siteid" => $siteid,
+			"category" => $category,
             "towards" => $towards,
             "towardsid" => $towardsid,
-            "amount" => $amount,
+            "purchasebillno" => $purchasebillno,
+            "totalamount" => $totalamount,
             "imprest" => ($imprest == 1 ? true : false),
-			"siteid" => $siteid,
 			"description" => $description,
             "expensedate" => $expensedate,
             "created" => $created,

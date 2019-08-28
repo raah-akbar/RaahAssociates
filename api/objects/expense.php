@@ -46,7 +46,7 @@ class Expense{
 		// select all query
 		$query = "SELECT * FROM	" . $this->table_name . "
 				  WHERE
-				  towardsid = ? AND imprest = 1";
+				  towardsid = ? AND imprest = 1 AND category = 'Supervisor'";
 	 
 		// prepare query statement
 		$stmt = $this->conn->prepare($query);

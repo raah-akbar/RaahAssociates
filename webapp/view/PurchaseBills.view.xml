@@ -5,49 +5,63 @@
 			<Toolbar>
 				<Button type="Back" press="onNavBack" tooltip="Back"/>
 				<ToolbarSpacer/>
-				<Title text="Expenses" level="H3"/>
+				<Title text="Purchase Bills" level="H3"/>
 				<ToolbarSpacer/>
 				<Button text="Logout" press="onLogout"/>
 			</Toolbar>
 		</customHeader>
 		<content>
-			<Carousel height="auto" showPageIndicator="false" pages="{viewData>/ExpenseInfo}">
-				<customLayout>
-					<CarouselLayout visiblePagesCount="3"/>
-				</customLayout>
-				<TileContent footer="{viewData>Name}" class="sapUiSmallMargin">
-					<content>
-						<NumericContent value="{viewData>Amount}" icon="sap-icon://lead"/>
-					</content>
-				</TileContent>
-			</Carousel>
-			<Table id="idExpenseBreakupTable" items="{viewData>/Expenses}"  updateFinished="onExpenseUpdateFinished">
+			<Table id="idPurchaseBillTable" items="{viewData>/PurchaseBills}" updateFinished="onPurchaseBillUpdateFinished">
 				<headerToolbar>
 					<Toolbar>
 						<content>
-							<Title text="Expenses" level="H2"/>
+							<Title text="Purchase Bills" level="H2"/>
 							<ToolbarSpacer/>
-							<Button icon="sap-icon://add" press="onAddExpense"/>
+							<Button icon="sap-icon://add" press="onAddPurchaseBill"/>
 						</content>
 					</Toolbar>
 				</headerToolbar>
 				<columns>
-					<Column hAlign="End">
+					<Column>
+						<Text text="Supplier Name"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Description"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Bill Date"/>
+					</Column>
+					<Column>
+						<Text text="Bill Number"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
 						<Text text="Amount"/>
 					</Column>
-					<Column hAlign="Center">
-						<Text text="Date"/>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="GST Amount"/>
 					</Column>
-					<Column hAlign="Center">
-						<Text text="Description"/>
+					<Column>
+						<Text text="Total Amount"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Active"/>
+					</Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
+						<Text text="Created"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem vAlign="Middle">
 						<cells>
-							<Text text="{viewData>amount}"/>
-							<Text text="{viewData>expensedate}"/>
+							<Text text="{viewData>suppliername}"/>
 							<Text text="{viewData>description}"/>
+							<Text text="{path: 'viewData>billdate', formatter:'.getDataDispValue'}"/>
+							<Text text="{viewData>billno}"/>
+							<Text text="{viewData>amount}"/>
+							<Text text="{viewData>gstamount}"/>
+							<Text text="{viewData>totalamount}"/>
+							<Text text="{= ${viewData>active} === '1' ? 'Yes' : 'No'}"/>
+							<Text text="{path: 'viewData>created', formatter:'.getDataDispValue'}"/>
 						</cells>
 					</ColumnListItem>
 				</items>

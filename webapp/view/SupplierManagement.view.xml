@@ -39,13 +39,13 @@
 					<Column demandPopin="false" minScreenWidth="Tablet">
 						<Text text="Bank A/C No"/>
 					</Column>
-					<Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
 						<Text text="IFSC Code"/>
 					</Column>
-					<Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
 						<Text text="Bank Name"/>
 					</Column>
-					<Column>
+					<Column demandPopin="false" minScreenWidth="Tablet">
 						<Text text="Bank Branch"/>
 					</Column>
 					<Column>

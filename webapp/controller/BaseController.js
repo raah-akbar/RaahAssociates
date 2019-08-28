@@ -109,6 +109,17 @@ sap.ui.define([
 				return oOutDateFormat.format(oDate);
 			}
 			return sDate;
+		},
+		
+		getValueFromKey: function(arr, key, keyValue, valueValue){
+			var i, sValue = "";
+			for(i = 0; i < arr.length; i++){
+				if(arr[0][keyValue] === key){
+					sValue = arr[0][valueValue];
+					break;
+				}
+			}
+			return sValue;
 		}
 	});
 

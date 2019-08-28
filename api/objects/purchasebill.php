@@ -38,17 +38,7 @@ class PurchaseBill{
 	 
 		return $stmt;
 	}
-	public $supplierid;
-    public $suppliername;
-    public $description;
-    public $billdate;
-    public $billno;
-    public $amount;
-    public $gstamount;
-    public $totalamount;
-    public $active;
-    public $created;
-    public $modified;
+	
 	// create user
 	function create(){
 		// query to insert record

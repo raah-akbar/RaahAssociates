@@ -46,7 +46,7 @@
 					<ColumnListItem vAlign="Middle">
 						<cells>
 							<Text text="{viewData>amount}"/>
-							<Text text="{viewData>expensedate}"/>
+							<Text text="{path: 'viewData>expensedate', formatter:'.getDataDispValue'}"/>
 							<Text text="{viewData>description}"/>
 						</cells>
 					</ColumnListItem>

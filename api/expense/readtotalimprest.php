@@ -43,15 +43,18 @@ if($utilities->notempty($data->towardsid)){
 	 
 			$expense_item=array(
 				"id" => $id,
-				"towards" => $towards,
-				"towardsid" => $towardsid,
-				"amount" => $amount,
-				"imprest" => ($imprest == 1 ? true : false),
+				"site" => $site,
 				"siteid" => $siteid,
+				"category" => $category,
+	            "towards" => $towards,
+	            "towardsid" => $towardsid,
+	            "purchasebillno" => $purchasebillno,
+	            "totalamount" => $totalamount,
+	            "imprest" => ($imprest == 1 ? true : false),
 				"description" => $description,
-				"expensedate" => $expensedate,
-				"created" => $created,
-				"modified" => $modified
+	            "expensedate" => $expensedate,
+	            "created" => $created,
+	            "modified" => $modified
 			);
 	 
 			array_push($expenses_arr["records"], $expense_item);

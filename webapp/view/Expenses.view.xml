@@ -36,13 +36,19 @@
 				</headerToolbar>
 				<columns>
 					<Column>
-						<Text text="Towards"/>
-					</Column>
-					<Column hAlign="End">
-						<Text text="Amount"/>
+						<Text text="Site"/>
 					</Column>
 					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-						<Text text="Site"/>
+						<Text text="Category"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Towards"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="Purchase Bill No"/>
+					</Column>
+					<Column hAlign="End">
+						<Text text="Total Amount"/>
 					</Column>
 					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
 						<Text text="Date"/>
@@ -54,10 +60,12 @@
 				<items>
 					<ColumnListItem vAlign="Middle" type="Navigation">
 						<cells>
+							<Text text="{viewData>site}"/>
+							<Text text="{viewData>category}"/>
 							<Text text="{viewData>towards}"/>
-							<Text text="{viewData>amount}"/>
-							<Text text="{viewData>siteid}"/>
-							<Text text="{viewData>expensedate}"/>
+							<Text text="{viewData>purchasebillno}"/>
+							<Text text="{viewData>totalamount}"/>
+							<Text text="{path: 'viewData>expensedate', formatter:'.getDataDispValue'}"/>
 							<Text text="{viewData>description}"/>
 						</cells>
 					</ColumnListItem>

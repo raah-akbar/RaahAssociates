@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
-	<Dialog title="{viewData>/SupplierAction} Supplier" stretchOnPhone="true" contentWidth="40%">
+	<Dialog title="{viewData>/SupplierAction} Supplier" contentWidth="40%">
 		<content>
 			<f:SimpleForm editable="{viewData>/SupplierFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
 				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
