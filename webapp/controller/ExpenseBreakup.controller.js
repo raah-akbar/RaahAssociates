@@ -30,6 +30,7 @@ sap.ui.define([
 				}],
 				ExpenseItem: {
 					siteid: "",
+					towards: "",
 					amount: "",
 					description: "",
 					expensedate1: new Date()
@@ -110,6 +111,7 @@ sap.ui.define([
 		onAddExpense: function () {
 			var oExpItem = {
 				siteid: "",
+				towards: "",
 				amount: "",
 				description: "",
 				expensedate1: new Date()
@@ -122,6 +124,7 @@ sap.ui.define([
 			var oViewModel = this.getModel("viewData"),
 				oPayloadObj = oViewModel.getProperty("/ExpenseItem");
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
+			oPayloadObj.userid = this.getModel("user").getProperty("/id");
 			if (this._isDataValid(oPayloadObj)) {
 				var sUrl, oModel = new JSONModel(),
 					sUserAction = oViewModel.getProperty("/UserAction");
@@ -164,6 +167,9 @@ sap.ui.define([
 				aFields = [];
 			if (!oData.siteid) {
 				aFields.push("Site");
+			}
+			if (!oData.towards) {
+				aFields.push("Towards");
 			}
 			if (!oData.expensedate) {
 				aFields.push("Expense Date");

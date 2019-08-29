@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS expensebreakup(
     id INT(11) NOT NULL AUTO_INCREMENT,
 	userid INT(11) NOT NULL,
     siteid INT(11) NOT NULL,
+    towards VARCHAR(256) NOT NULL,
     amount DECIMAL(13,2) NOT NULL,
     description TEXT NOT NULL,
     expensedate DATETIME NOT NULL,

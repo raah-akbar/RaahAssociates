@@ -39,6 +39,7 @@ if($num>0){
             "id" => $id,
             "userid" => $userid,
             "siteid" => $siteid,
+            "towards" => $towards,
             "amount" => $amount,
 			"description" => $description,
 			"expensedate" => $expensedate,

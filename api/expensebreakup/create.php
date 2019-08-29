@@ -27,14 +27,16 @@ $data = json_decode(file_get_contents("php://input"));
 if(
 	$utilities->notempty($data->userid) &&
 	$utilities->notempty($data->siteid) &&
+	$utilities->notempty($data->towards) &&
     $utilities->notempty($data->amount) &&
     $utilities->notempty($data->description) &&
-	$utilities->notempty($data->expensedate) &&
+	$utilities->notempty($data->expensedate)
 ){
  
     // set expense property values
     $expense->userid = $data->userid;
     $expense->siteid = $data->siteid;
+    $expense->towards = $data->towards;
     $expense->amount = $data->amount;
     $expense->description = $data->description;
     $expense->expensedate = $data->expensedate;
