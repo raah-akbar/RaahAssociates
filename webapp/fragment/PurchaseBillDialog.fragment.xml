@@ -28,8 +28,8 @@
 			</f:SimpleForm>
 		</content>
 		<buttons>
-			<Button text="Delete" icon="sap-icon://delete" press="onDeletePurchaseBill" visible="{viewData>/DeleteVisible}"/>
-			<Button text="Edit" icon="sap-icon://edit" press="onEditPurchaseBill" visible="{viewData>/EditVisible}"/>
+		<!--	<Button text="Delete" icon="sap-icon://delete" press="onDeletePurchaseBill" visible="{viewData>/DeleteVisible}"/>
+			<Button text="Edit" icon="sap-icon://edit" press="onEditPurchaseBill" visible="{viewData>/EditVisible}"/>-->
 			<Button text="Submit" icon="sap-icon://save" press="onSubmitPurchaseBill" visible="{viewData>/SubmitVisible}"/>
 			<Button text="Cancel" icon="sap-icon://decline" press="onCancelPurchaseBill"/>
 		</buttons>

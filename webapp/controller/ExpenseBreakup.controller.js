@@ -17,33 +17,33 @@ sap.ui.define([
 				NoOfExpenses: "0",
 				UserAction: "Add",
 				Expenses: [],
-				Sites:[],
-				ExpenseInfo:[{
-					Name : "Total Amount",
-					Amount : "9000"
-				},{
-					Name : "Spent Amount",
-					Amount : "5000"
-				},{
-					Name : "Balance Amount",
-					Amount : "4000"
+				Sites: [],
+				ExpenseInfo: [{
+					Name: "Total Amount",
+					Amount: "9000"
+				}, {
+					Name: "Spent Amount",
+					Amount: "5000"
+				}, {
+					Name: "Balance Amount",
+					Amount: "4000"
 				}],
-				ExpenseItem:{
-					siteid : "",
-					amount : "",
-					description : "",
-					expensedate1 : ""
+				ExpenseItem: {
+					siteid: "",
+					amount: "",
+					description: "",
+					expensedate1: new Date()
 				}
 			});
 			this.setModel(oViewModel, "viewData");
 			this.getRouter().getRoute("ExpenseBreakup").attachMatched(this._onRouteMatched, this);
 		},
-		
+
 		_onRouteMatched: function () {
 			this._getSites();
 			this._getExpenses();
 		},
-		
+
 		_getSites: function () {
 			var oModel = new JSONModel();
 			oModel.attachRequestCompleted(this._onReadSitesComplete, this);
@@ -79,7 +79,7 @@ sap.ui.define([
 				"GET", false, false, {
 					"Accept": "*/*",
 					"Content-Type": "application/json; charset=UTF-8"
-			});
+				});
 		},
 
 		_onReadExpensesComplete: function (oEvent) {
@@ -95,7 +95,7 @@ sap.ui.define([
 		_onReadExpensesFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
+
 		onExpenseUpdateFinished: function (oEvent) {
 			// update the project's object counter after the table update
 			var oTable = oEvent.getSource(),
@@ -107,20 +107,27 @@ sap.ui.define([
 				this.getModel("viewData").setProperty("/NoOfExpenses", "0");
 			}
 		},
-		onAddExpense: function(){
+		onAddExpense: function () {
+			var oExpItem = {
+				siteid: "",
+				amount: "",
+				description: "",
+				expensedate1: new Date()
+			};
+			this.getModel("viewData").setProperty("/ExpenseItem", oExpItem);
 			this._getExpenseDialog().open();
 		},
-		
+
 		onSubmitExpense: function () {
 			var oViewModel = this.getModel("viewData"),
-			oPayloadObj = oViewModel.getProperty("/ExpenseItem");
+				oPayloadObj = oViewModel.getProperty("/ExpenseItem");
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
-			if(this._isDataValid(oPayloadObj)){
+			if (this._isDataValid(oPayloadObj)) {
 				var sUrl, oModel = new JSONModel(),
-				sUserAction = oViewModel.getProperty("/UserAction");
-				if(sUserAction === "Add"){
+					sUserAction = oViewModel.getProperty("/UserAction");
+				if (sUserAction === "Add") {
 					sUrl = "/api/expensebreakup/create";
-				}else if(sUserAction === "Edit"){
+				} else if (sUserAction === "Edit") {
 					sUrl = "/api/expensebreakup/update";
 				}
 				delete oPayloadObj.expensedate1;
@@ -131,9 +138,9 @@ sap.ui.define([
 					"POST", false, false, {
 						"Accept": "*/*",
 						"Content-Type": "application/json; charset=UTF-8"
-				});
+					});
 			}
-		
+
 		},
 
 		_onCreateExpenseComplete: function (oEvent) {
@@ -151,25 +158,26 @@ sap.ui.define([
 		_onCreateExpenseFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
-		_isDataValid: function(oData){
-			var bIsValid = true, aFields = [];
-			if(!oData.siteid){
+
+		_isDataValid: function (oData) {
+			var bIsValid = true,
+				aFields = [];
+			if (!oData.siteid) {
 				aFields.push("Site");
 			}
-			if(!oData.expensedate){
+			if (!oData.expensedate) {
 				aFields.push("Expense Date");
 			}
-			if(!oData.amount){
+			if (!oData.amount) {
 				aFields.push("Amount");
 			}
-			if(!oData.description){
+			if (!oData.description) {
 				aFields.push("Description");
 			}
-			if(aFields.length > 0){
+			if (aFields.length > 0) {
 				bIsValid = false;
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
-				sMessage = aFields.join(", ");
+					sMessage = aFields.join(", ");
 				MessageBox.alert(sMessage + " is/are mandatory.", {
 					styleClass: bCompact ? "sapUiSizeCompact" : ""
 				});
@@ -180,28 +188,33 @@ sap.ui.define([
 		onCancelExpense: function () {
 			this._getExpenseDialog().close();
 		},
-		
+
 		_getExpenseDialogId: function () {
 			return this.createId("expDialog");
 		},
-		
+
 		_getExpenseDialog: function () {
 			var oView = this.getView();
 			if (!this._oExpenseDialog) {
-				this._oExpenseDialog = sap.ui.xmlfragment(this._getExpenseDialogId(), "com.raahassociates.launchpad.fragment.ExpenseBreakupDialog", this);
+				this._oExpenseDialog = sap.ui.xmlfragment(this._getExpenseDialogId(), "com.raahassociates.launchpad.fragment.ExpenseBreakupDialog",
+					this);
 			}
 			oView.addDependent(this._oExpenseDialog);
 			jQuery.sap.syncStyleClass(this.getOwnerComponent().getContentDensityClass(), oView, this._oExpenseDialog);
 			return this._oExpenseDialog;
 		},
-		
-		_getFormattedDateStr: function(oDate){
-			var oDateFormat = DateFormat.getDateTimeInstance({pattern : "yyyy-MM-dd HH:mm:ss" });   
+
+		_getFormattedDateStr: function (oDate) {
+			var oDateFormat = DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd HH:mm:ss"
+			});
 			return oDateFormat.format(oDate);
 		},
-		
-		_getFormattedDate: function(sDate){
-			var oDateFormat = DateFormat.getDateTimeInstance({pattern : "yyyy-MM-dd HH:mm:ss" });   
+
+		_getFormattedDate: function (sDate) {
+			var oDateFormat = DateFormat.getDateTimeInstance({
+				pattern: "yyyy-MM-dd HH:mm:ss"
+			});
 			return oDateFormat.parse(sDate);
 		}
 	});

@@ -170,7 +170,7 @@ sap.ui.define([
 			oPayloadObj = oViewModel.getProperty("/SiteItem");
 			oPayloadObj.active = oPayloadObj.active1 ? "1" : "0";
 			oPayloadObj.startdate = this._getFormattedDateStr(oPayloadObj.startdate1);
-			oPayloadObj.enddate = oPayloadObj.enddate1 ? this._getFormattedDateStr(oPayloadObj.enddate1) : null;
+			oPayloadObj.enddate = oPayloadObj.enddate1 ? this._getFormattedDateStr(oPayloadObj.enddate1) : "";
 			if(this._isDataValid(oPayloadObj)){
 				var sUrl, oModel = new JSONModel(),
 				sSiteAction = oViewModel.getProperty("/SiteAction");

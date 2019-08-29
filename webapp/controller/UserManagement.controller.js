@@ -107,7 +107,7 @@ sap.ui.define([
 					active: "1",
 					active1: true
 				},
-			oViewModel = this.getModel("viewData");
+				oViewModel = this.getModel("viewData");
 			oViewModel.setProperty("/UserItem", oUserItem);
 			oViewModel.setProperty("/UserAction", "Add");
 			oViewModel.setProperty("/UserFormEditable", true);
@@ -126,16 +126,16 @@ sap.ui.define([
 			oViewModel.setProperty("/SubmitVisible", true);
 			this._getUserDialog().open();
 		},
-		
+
 		onDeleteUser: function () {
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.confirm("Are you sure you want to delete user ?", {
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
-				onClose: function(oAction) { 
-					if(oAction === MessageBox.Action.OK){
+				onClose: function (oAction) {
+					if (oAction === MessageBox.Action.OK) {
 						var oViewModel = this.getModel("viewData"),
-						oModel = new JSONModel(),
-						oPayloadObj = {};
+							oModel = new JSONModel(),
+							oPayloadObj = {};
 						oPayloadObj.id = oViewModel.getProperty("/UserItem/id");
 						oModel.attachRequestCompleted(this._onDeleteUserComplete, this);
 						oModel.attachRequestFailed(this._onDeleteUserFailed, this);
@@ -144,7 +144,7 @@ sap.ui.define([
 							"POST", false, false, {
 								"Accept": "*/*",
 								"Content-Type": "application/json; charset=UTF-8"
-						});
+							});
 					}
 				}.bind(this)
 			});
@@ -168,14 +168,15 @@ sap.ui.define([
 
 		onSubmitUser: function () {
 			var oViewModel = this.getModel("viewData"),
-			oPayloadObj = oViewModel.getProperty("/UserItem");
+				oPayloadObj = oViewModel.getProperty("/UserItem");
 			oPayloadObj.active = oPayloadObj.active1 ? "1" : "0";
-			if(this._isDataValid(oPayloadObj)){
+			oPayloadObj.rolename = this.getValueFromKey(this.getModel("dropdown").getProperty("/records"), oPayloadObj.roleid, "textid", "text");
+			if (this._isDataValid(oPayloadObj)) {
 				var sUrl, oModel = new JSONModel(),
-				sUserAction = oViewModel.getProperty("/UserAction");
-				if(sUserAction === "Add"){
+					sUserAction = oViewModel.getProperty("/UserAction");
+				if (sUserAction === "Add") {
 					sUrl = "/api/user/create";
-				}else if(sUserAction === "Edit"){
+				} else if (sUserAction === "Edit") {
 					sUrl = "/api/user/update";
 				}
 				delete oPayloadObj.active1;
@@ -186,31 +187,32 @@ sap.ui.define([
 					"POST", false, false, {
 						"Accept": "*/*",
 						"Content-Type": "application/json; charset=UTF-8"
-				});
+					});
 			}
 		},
-		
-		_isDataValid: function(oData){
-			var bIsValid = true, aFields = [];
-			if(!oData.username){
+
+		_isDataValid: function (oData) {
+			var bIsValid = true,
+				aFields = [];
+			if (!oData.username) {
 				aFields.push("Username");
 			}
-			if(!oData.password){
+			if (!oData.password) {
 				aFields.push("Password");
 			}
-			if(!oData.firstname){
+			if (!oData.firstname) {
 				aFields.push("First Name");
 			}
-			if(!oData.roleid){
+			if (!oData.roleid) {
 				aFields.push("Role Id");
 			}
-			if(!oData.rolename){
+			if (!oData.rolename) {
 				aFields.push("Role Name");
 			}
-			if(aFields.length > 0){
+			if (aFields.length > 0) {
 				bIsValid = false;
 				var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length,
-				sMessage = aFields.join(", ");
+					sMessage = aFields.join(", ");
 				MessageBox.alert(sMessage + " is/are mandatory.", {
 					styleClass: bCompact ? "sapUiSizeCompact" : ""
 				});
@@ -233,14 +235,14 @@ sap.ui.define([
 		_onCreateUserFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
-		onSearchUser: function(oEvent){
+
+		onSearchUser: function (oEvent) {
 			var sValue = oEvent.getParameter("newValue"),
-			aFilters = [
-				new Filter("firstname", FilterOperator.Contains, sValue),
-				new Filter("lastname", FilterOperator.Contains, sValue)
-			],
-			oFilter = new Filter({
+				aFilters = [
+					new Filter("firstname", FilterOperator.Contains, sValue),
+					new Filter("lastname", FilterOperator.Contains, sValue)
+				],
+				oFilter = new Filter({
 					filters: aFilters,
 					and: false
 				});
