@@ -193,14 +193,14 @@ sap.ui.define([
 			var oData = oEvent.getSource().getData();
 			if (oData.success) {
 				this.getModel("viewData").setProperty("/PurchaseBills", oData.records);
-				setTimeout(function(){
+				setTimeout(function () {
 					var aFilters = [
-						new Filter("supplierid", FilterOperator.Contains, this._sSupplier)
-					],
-					oFilter = new Filter({
-						filters: aFilters,
-						and: false
-					});
+							new Filter("supplierid", FilterOperator.Contains, this._sSupplier)
+						],
+						oFilter = new Filter({
+							filters: aFilters,
+							and: false
+						});
 					this.byId("expDialog--idPurchaseBillsCB").getBinding("items").filter([oFilter]);
 				}.bind(this), 500);
 			} else {
@@ -211,13 +211,25 @@ sap.ui.define([
 		_onReadPurchaseBillsFailed: function () {
 			this.getBusyDialog().close();
 		},
-		
-		onPurchaseBillChange: function(oEvent){
+
+		onPurchaseBillChange: function (oEvent) {
 			var sBillDate = oEvent.getParameter("selectedItem").getBindingContext("viewData").getProperty("billdate");
 			this.getModel("viewData").setProperty("/PurchaseBillDate", sBillDate);
 		},
-		
+
 		onAddExpense: function () {
+			var oExpItem = {
+				towardsid: "",
+				supplierid: "",
+				category: "Supervisor",
+				purchasebillno: "",
+				totalamount: "",
+				imprest1: false,
+				siteid: "",
+				description: "",
+				expensedate1: new Date()
+			};
+			this.getModel("viewData").setProperty("/ExpenseItem", oExpItem);
 			this._getExpenseDialog().open();
 		},
 
@@ -235,18 +247,18 @@ sap.ui.define([
 			oPayloadObj.imprest = oPayloadObj.imprest1 ? "1" : "0";
 			oPayloadObj.site = this.getValueFromKey(oViewModel.getProperty("/Sites"), oPayloadObj.siteid, "id", "name");
 			oPayloadObj.expensedate = this._getFormattedDateStr(oPayloadObj.expensedate1);
-			if(oPayloadObj.category === "Others"){
+			if (oPayloadObj.category === "Others") {
 				oPayloadObj.towardsid = "";
 				oPayloadObj.imprest = "0";
 				oPayloadObj.purchasebillno = "";
 				oPayloadObj.supplierid = "";
 				oPayloadObj.suppliername = "";
-			}else if(oPayloadObj.category === "Supervisor"){
+			} else if (oPayloadObj.category === "Supervisor") {
 				oPayloadObj.towards = this.getValueFromKey(oViewModel.getProperty("/Users"), oPayloadObj.towardsid, "id", "username");
 				oPayloadObj.purchasebillno = "";
 				oPayloadObj.supplierid = "";
 				oPayloadObj.suppliername = "";
-			}else if(oPayloadObj.category === "Supplier"){	
+			} else if (oPayloadObj.category === "Supplier") {
 				oPayloadObj.towards = this.getValueFromKey(oViewModel.getProperty("/Suppliers"), oPayloadObj.supplierid, "id", "name");
 				oPayloadObj.imprest = "0";
 			}

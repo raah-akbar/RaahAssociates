@@ -4,10 +4,9 @@ class ExpenseBreakup{
     // database connection and table name
     private $conn;
     private $table_name = "expensebreakup";
- 
+
      // object properties
 	public $id;
-    public $expenseid;
     public $userid;
     public $siteid;
     public $amount;
@@ -42,13 +41,12 @@ class ExpenseBreakup{
 		$query = "INSERT INTO
 					" . $this->table_name . "
 				SET
-					expenseid=:expenseid, userid=:userid, siteid=:siteid, amount=:amount, description=:description, expensedate=:expensedate, created=:created";
+					userid=:userid, siteid=:siteid, amount=:amount, description=:description, expensedate=:expensedate, created=:created";
 	 
 		// prepare query
 		$stmt = $this->conn->prepare($query);
 	 
 		// sanitize
-		$this->expenseid=htmlspecialchars(strip_tags($this->expenseid));
 		$this->userid=htmlspecialchars(strip_tags($this->userid));
 		$this->siteid=htmlspecialchars(strip_tags($this->siteid));
 		$this->amount=htmlspecialchars(strip_tags($this->amount));
@@ -57,7 +55,6 @@ class ExpenseBreakup{
 		$this->created=htmlspecialchars(strip_tags($this->created));
 		
 		// bind values
-		$stmt->bindParam(":expenseid", $this->expenseid);
 		$stmt->bindParam(":userid", $this->userid);
 		$stmt->bindParam(":siteid", $this->siteid);
 		$stmt->bindParam(":amount", $this->amount);
@@ -79,7 +76,7 @@ class ExpenseBreakup{
 		$query = "UPDATE
 					" . $this->table_name . "
 				SET
-					expenseid=:expenseid, userid=:userid, siteid=:siteid, amount=:amount, description=:description, expensedate=:expensedate, modified=:modified
+					userid=:userid, siteid=:siteid, amount=:amount, description=:description, expensedate=:expensedate, modified=:modified
 				WHERE
 					id = :id";
 	 
@@ -87,8 +84,6 @@ class ExpenseBreakup{
 		$stmt = $this->conn->prepare($query);
 	 
 		// sanitize
-		$this->expenseid=htmlspecialchars(strip_tags($this->expenseid));
-		$this->userid=htmlspecialchars(strip_tags($this->userid));
 		$this->siteid=htmlspecialchars(strip_tags($this->siteid));
 		$this->amount=htmlspecialchars(strip_tags($this->amount));
 		$this->description=htmlspecialchars(strip_tags($this->description));
@@ -96,7 +91,6 @@ class ExpenseBreakup{
 		$this->modified=htmlspecialchars(strip_tags($this->modified));
 		
 		// bind values
-		$stmt->bindParam(":expenseid", $this->expenseid);
 		$stmt->bindParam(":userid", $this->userid);
 		$stmt->bindParam(":siteid", $this->siteid);
 		$stmt->bindParam(":amount", $this->amount);

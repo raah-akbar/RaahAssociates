@@ -37,7 +37,6 @@ if($num>0){
  
         $expense_item=array(
             "id" => $id,
-            "expenseid" => $towardsid,
             "userid" => $userid,
             "siteid" => $siteid,
             "amount" => $amount,

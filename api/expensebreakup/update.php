@@ -26,16 +26,14 @@ $data = json_decode(file_get_contents("php://input"));
 
 // make sure data is not empty
 if(
-    $utilities->notempty($data->expenseid) &&
 	$utilities->notempty($data->userid) &&
 	$utilities->notempty($data->siteid) &&
     $utilities->notempty($data->amount) &&
     $utilities->notempty($data->description) &&
-	$utilities->notempty($data->expensedate) &&
+	$utilities->notempty($data->expensedate)
 ){
  
     // set expense property values
-	$expense->expenseid = $data->expenseid;
     $expense->userid = $data->userid;
     $expense->siteid = $data->siteid;
     $expense->amount = $data->amount;

@@ -26,7 +26,7 @@ sap.ui.define([
 					supplierid: "",
 					description: "",
 					billdate: "",
-					billdate1: null,
+					billdate1: new Date(),
 					billno: "",
 					amount: "",
 					gstamount: "",
@@ -108,6 +108,19 @@ sap.ui.define([
 			}
 		},
 		onAddPurchaseBill: function () {
+			var PurchaseBillItem = {
+				supplierid: "",
+				description: "",
+				billdate: "",
+				billdate1: new Date(),
+				billno: "",
+				amount: "",
+				gstamount: "",
+				totalamount: "",
+				active: "1",
+				active1: true
+			};
+			this.getModel("viewData").setProperty("/PurchaseBillItem", PurchaseBillItem);
 			this._getPurchaseBillDialog().open();
 		},
 

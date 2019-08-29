@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
-	<Dialog title="{viewData>/UserAction} User" stretchOnPhone="true" contentWidth="40%">
+	<Dialog title="{viewData>/UserAction} User">
 		<content>
 			<f:SimpleForm editable="{viewData>/UserFormEditable}" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
 				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
@@ -19,12 +19,13 @@
 					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/orgemail}"/>
 					<Label text="Phone"/>
 					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/phone}"/>
-					<Label text="Role Id" required="true"/>
-					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/roleid}"/>
-					<Label text="Role Name" required="true"/>
-					<Input editable="{viewData>/UserFormEditable}" value="{viewData>/UserItem/rolename}"/>
+					<Label text="Role" required="true"/>
+					<ComboBox selectedKey="{viewData>/UserItem/roleid}" editable="{viewData>/UserFormEditable}"
+						items="{ path: 'dropdown>/records', sorter: { path: 'text' }, filters : [ { path : 'active', operator : 'EQ', value1 : 1}, { path : 'category', operator : 'EQ', value1 : 'RolesDD'} ]}">
+						<core:Item key="{dropdown>textid}" text="{dropdown>text}"/>
+					</ComboBox>
 					<Label text="Active"/>
-					<CheckBox editable="{viewData>/UserFormEditable}" selected="{viewData>/UserItem/active1}" />
+					<CheckBox editable="{viewData>/UserFormEditable}" selected="{viewData>/UserItem/active1}"/>
 				</f:content>
 			</f:SimpleForm>
 		</content>

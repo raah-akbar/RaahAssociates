@@ -11,16 +11,6 @@
 			</Toolbar>
 		</customHeader>
 		<content>
-			<Carousel height="auto" showPageIndicator="false" pages="{/SiteExpenses}">
-				<customLayout>
-					<CarouselLayout visiblePagesCount="5"/>
-				</customLayout>
-				<TileContent footer="{Name}" class="sapUiSmallMargin">
-					<content>
-						<NumericContent value="{Amount}" icon="sap-icon://lead"/>
-					</content>
-				</TileContent>
-			</Carousel>
 			<Table id="idExpensesTable" items="{viewData>/Expenses}" updateFinished="onExpenseUpdateFinished">
 				<headerToolbar>
 					<Toolbar>
