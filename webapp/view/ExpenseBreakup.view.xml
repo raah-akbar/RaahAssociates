@@ -32,6 +32,9 @@
 					</Toolbar>
 				</headerToolbar>
 				<columns>
+					<Column>
+						<Text text="Towards"/>
+					</Column>
 					<Column hAlign="End">
 						<Text text="Amount"/>
 					</Column>
@@ -45,6 +48,7 @@
 				<items>
 					<ColumnListItem vAlign="Middle">
 						<cells>
+							<Text text="{viewData>towards}"/>
 							<Text text="{viewData>amount}"/>
 							<Text text="{path: 'viewData>expensedate', formatter:'.getDataDispValue'}"/>
 							<Text text="{viewData>description}"/>
